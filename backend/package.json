@@ -1,7 +1,7 @@
 {
-  "name": "velzck-shop-backend",
+  "name": "dripstep-backend",
   "version": "1.0.0",
-  "description": "AI-powered product recommendation backend for Velzck Shop",
+  "description": "AI-powered product recommendation backend for Drip Step",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

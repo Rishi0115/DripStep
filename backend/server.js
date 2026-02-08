@@ -1,5 +1,5 @@
 /**
- * Velzck Shop Backend Server
+ * Drip Step Backend Server
  * AI-powered product recommendation system
  */
 
@@ -153,7 +153,7 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`\n🚀 Velzck Shop Backend running on http://localhost:${PORT}`);
+    console.log(`\n🚀 Drip Step Backend running on http://localhost:${PORT}`);
     console.log(`📡 Recommendation endpoint: POST http://localhost:${PORT}/api/recommend`);
     console.log(`❤️  Health check: GET http://localhost:${PORT}/api/health\n`);
 });

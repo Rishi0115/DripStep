@@ -1,107 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Velzck Shop</title>
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <link rel="stylesheet" href="/css/normalize.css">
+    <title>Drip Step | FUTURE</title>
+
+    <!-- Fonts: Orbitron & Rajdhani -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/responsive.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- Swiper.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 </head>
 
 <body>
+    <!-- 3D Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper">
 
 
 
-    <header id="top">
+        <header id="top">
 
 
-        <div class="cont-nav pMain">
-            <a href="#top">
-                <h1 class="tittle"> <span>Velzck</span> Shop</h1>
-            </a>
-            <div class="menuBar"></div>
-            <div class="nav-main">
+            <div class="cont-nav pMain">
+                <a href="#top">
+                    <h1 class="tittle"> <span>Drip</span> Step</h1>
+                </a>
+                <div class="menuBar"></div>
+                <div class="nav-main">
 
-                <nav>
+                    <nav>
 
-                    <ul class="nav-cont ">
-                        <div class="dec-bar"></div>
+                        <ul class="nav-cont ">
+                            <div class="dec-bar"></div>
 
-                        <div class="ul-cont ul1">
-                            <li><a href="#shop"> Shop</a></li>
-                        </div>
+                            <div class="ul-cont ul1">
+                                <li><a href="#shop"> Shop</a></li>
+                            </div>
 
-                        <div class="ul-cont ul2">
-                            <li><a href="#aboutUs">about us</a></li>
-                        </div>
+                            <div class="ul-cont ul2">
+                                <li><a href="#aboutUs">about us</a></li>
+                            </div>
 
-                        <div class="ul-cont ul3">
-                            <li><a href="#contact">Contact</a></li>
-                        </div>
+                            <div class="ul-cont ul3">
+                                <li><a href="#contact">Contact</a></li>
+                            </div>
 
-                        <div class="ul-cont ul4">
-                            <li><a href="#FAQ">FAQ</a></li>
-                        </div>
+                            <div class="ul-cont ul4">
+                                <li><a href="#FAQ">FAQ</a></li>
+                            </div>
 
-                    </ul>
-                </nav>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="menu-btn"><i class="fas fa-bars"></i></div>
+                <div class="menu-btn-active"><i class="fas fa-times"></i></div>
             </div>
-            <div class="menu-btn"><i class="fas fa-bars"></i></div>
-            <div class="menu-btn-active"><i class="fas fa-times"></i></div>
-        </div>
 
-    </header>
+        </header>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.menu-btn').click(function () {
-                $('.nav-cont').toggleClass('active')
-                $('.menu-btn').toggleClass('btn-active')
-                $('.menu-btn-active').toggleClass('close-active')
-                $('.ul1').toggleClass('active')
-                $('.ul2').toggleClass('active')
-                $('.ul3').toggleClass('active')
-                $('.ul4').toggleClass('active')
-                $('.ul5').toggleClass('active')
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.menu-btn').click(function () {
+                    $('.nav-cont').toggleClass('active')
+                    $('.menu-btn').toggleClass('btn-active')
+                    $('.menu-btn-active').toggleClass('close-active')
+                    $('.ul1').toggleClass('active')
+                    $('.ul2').toggleClass('active')
+                    $('.ul3').toggleClass('active')
+                    $('.ul4').toggleClass('active')
+                    $('.ul5').toggleClass('active')
+                });
+
+                $('.ul-cont').click(function () {
+                    $('.nav-cont').toggleClass('active')
+                    $('.menu-btn').toggleClass('btn-active')
+                    $('.menu-btn-active').toggleClass('close-active')
+                    $('.ul1').toggleClass('active')
+                    $('.ul2').toggleClass('active')
+                    $('.ul3').toggleClass('active')
+                    $('.ul4').toggleClass('active')
+                    $('.ul5').toggleClass('active')
+                });
+
+
             });
-
-            $('.ul-cont').click(function () {
-                $('.nav-cont').toggleClass('active')
-                $('.menu-btn').toggleClass('btn-active')
-                $('.menu-btn-active').toggleClass('close-active')
-                $('.ul1').toggleClass('active')
-                $('.ul2').toggleClass('active')
-                $('.ul3').toggleClass('active')
-                $('.ul4').toggleClass('active')
-                $('.ul5').toggleClass('active')
-            });
-
-
-        });
-    </script>
-
-
-    <div class="hero-parallax">
-        <div class="rellax snkbg" data-rellax-speed="-2.5" data-rellax-zindex="0"></div>
-        <div class="rellax snk" data-rellax-speed="-1" data-rellax-zindex="1"></div>
-
-        <script src="/rellax.min.js"></script>
-        <script>
-            var rellax = new Rellax('.rellax');
         </script>
-    </div>
+
+
+        <div class="hero-parallax">
+            <div class="rellax snkbg" data-rellax-speed="-2.5" data-rellax-zindex="0"></div>
+            <div class="rellax snk" data-rellax-speed="-1" data-rellax-zindex="1"></div>
+
+            <script src="/rellax.min.js"></script>
+            <script>
+                var rellax = new Rellax('.rellax');
+            </script>
+        </div>
 
 
     </div>
@@ -149,7 +162,8 @@
                             error placeat nam, hic doloremque perspiciatis.</p>
 
                         <div class="cta-cont">
-                            <a class="cta" href="https://github.com/VelzckC0D3" target="_blank" rel="noopener noreferrer">learn more</a>
+                            <a class="cta" href="https://github.com/VelzckC0D3" target="_blank"
+                                rel="noopener noreferrer">learn more</a>
                         </div>
 
                     </div>
@@ -175,10 +189,60 @@
             <h2 id="tx4">free shipping</h2>
         </div>
 
+        <!-- AI Product Recommendation Section -->
+        <section class="recommendation-section" id="ai-recommend">
+            <div class="recommendation-container">
+                <h2 class="recommendation-title">
+                    <i class="fas fa-magic"></i> AI Shoe Finder
+                </h2>
+                <p class="recommendation-subtitle">Tell us your style and budget — our AI will find
+                    the perfect shoes for you!</p>
+
+                <form id="recommendation-form" class="recommendation-form">
+                    <div class="form-group">
+                        <label for="product-input">
+                            <i class="fas fa-search"></i> What shoes are you looking for?
+                        </label>
+                        <input type="text" id="product-input" placeholder="Search your Shoes" maxlength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="price-input">
+                            <i class="fas fa-rupee-sign"></i> Maximum Budget (₹)
+                        </label>
+                        <input type="number" id="price-input" placeholder="e.g., 5000" min="1" max="1000000" required>
+                    </div>
+                    <button type="submit" id="submit-btn" class="recommendation-btn">
+                        <i class="fas fa-robot"></i> Get AI Recommendation
+                    </button>
+                </form>
+
+                <div id="recommendation-loading" class="recommendation-loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <span>Finding the best products for you...</span>
+                </div>
+
+                <div id="recommendation-error" class="recommendation-error" style="display: none;"></div>
+
+                <div id="recommendation-count" class="recommendation-count" style="display: none;"></div>
+
+                <!-- Swiper Container for Products -->
+                <div id="recommendation-result" class="recommendation-result" style="display: none;">
+                    <div class="swiper recommendation-swiper">
+                        <div class="swiper-wrapper" id="swiper-products">
+                            <!-- Product slides will be inserted here -->
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <div class="product-cont">
 
             <div tabindex="0" id="snkc" class="sneaker-cont1">
-                <img loading="lazy" class="sneaker-img" src="/imgs/1.1.webp" alt="mike Jordan SB">
+                <img loading="lazy" class="sneaker-img" src="imgs/1.1.webp" alt="mike Jordan SB">
                 <div class="sneakerDesc">
 
                     <div class="sneaker-decor"></div>
@@ -208,7 +272,7 @@
             </div>
 
             <div tabindex="0" id="snkc" class="sneaker-cont2">
-                <img loading="lazy" class="sneaker-img" src="/imgs/1.2.webp" alt="mike Jordan SB">
+                <img loading="lazy" class="sneaker-img" src="imgs/1.2.webp" alt="mike Jordan SB">
                 <div class="sneakerDesc">
                     <div class="sneaker-decor"></div>
                     <div class="data-cont">
@@ -237,7 +301,7 @@
             </div>
 
             <div tabindex="0" id="snkc" class="sneaker-cont3">
-                <img loading="lazy" class="sneaker-img" src="/imgs/1.3.webp" alt="mike Jordan SB">
+                <img loading="lazy" class="sneaker-img" src="imgs/1.3.webp" alt="mike Jordan SB">
                 <div class="sneakerDesc">
                     <div class="sneaker-decor"></div>
                     <div class="data-cont">
@@ -266,7 +330,7 @@
             </div>
 
             <div tabindex="0" id="snkc" class="sneaker-cont4">
-                <img loading="lazy" class="sneaker-img" src="/imgs/1.4.webp" alt="mike Jordan SB">
+                <img loading="lazy" class="sneaker-img" src="imgs/1.4.webp" alt="mike Jordan SB">
                 <div class="sneakerDesc">
                     <div class="sneaker-decor"></div>
                     <div class="data-cont">
@@ -295,7 +359,7 @@
             </div>
 
             <div tabindex="0" id="snkc" class="sneaker-cont5">
-                <img loading="lazy" class="sneaker-img" src="/imgs/1.5.webp" alt="mike Jordan SB">
+                <img loading="lazy" class="sneaker-img" src="imgs/1.5.webp" alt="mike Jordan SB">
                 <div class="sneakerDesc">
                     <div class="sneaker-decor"></div>
                     <div class="data-cont">
@@ -324,7 +388,7 @@
             </div>
 
             <div tabindex="0" id="snkc" class="sneaker-cont6">
-                <img loading="lazy" class="sneaker-img" src="/imgs/1.7.webp" alt="mike Jordan SB">
+                <img loading="lazy" class="sneaker-img" src="imgs/1.7.webp" alt="mike Jordan SB">
                 <div class="sneakerDesc">
                     <div class="sneaker-decor"></div>
                     <div class="data-cont">
@@ -353,7 +417,7 @@
             </div>
 
             <div tabindex="0" id="snkc" class="sneaker-cont7">
-                <img loading="lazy" class="sneaker-img" src="/imgs/2.8.webp" alt="mike Jordan SB">
+                <img loading="lazy" class="sneaker-img" src="imgs/2.8.webp" alt="mike Jordan SB">
                 <div class="sneakerDesc">
                     <div class="sneaker-decor"></div>
                     <div class="data-cont">
@@ -382,7 +446,7 @@
             </div>
 
             <div tabindex="0" id="snkc" class="sneaker-cont8">
-                <img loading="lazy" class="sneaker-img" src="/imgs/2.9.webp" alt="mike Jordan SB">
+                <img loading="lazy" class="sneaker-img" src="imgs/2.9.webp" alt="mike Jordan SB">
                 <div class="sneakerDesc">
                     <div class="sneaker-decor"></div>
                     <div class="data-cont">
@@ -411,7 +475,7 @@
             </div>
 
             <div tabindex="0" id="snkc" class="sneaker-cont9">
-                <img loading="lazy" class="sneaker-img" src="/imgs/2.3.webp" alt="mike Jordan SB">
+                <img loading="lazy" class="sneaker-img" src="imgs/2.3.webp" alt="mike Jordan SB">
                 <div class="sneakerDesc">
                     <div class="sneaker-decor"></div>
                     <div class="data-cont">
@@ -440,7 +504,7 @@
             </div>
 
             <div tabindex="0" id="snkc" class="sneaker-cont10">
-                <img loading="lazy" class="sneaker-img" src="/imgs/2.6.webp" alt="mike Jordan SB">
+                <img loading="lazy" class="sneaker-img" src="imgs/2.6.webp" alt="mike Jordan SB">
                 <div class="sneakerDesc">
                     <div class="sneaker-decor"></div>
                     <div class="data-cont">
@@ -469,7 +533,7 @@
             </div>
 
             <div tabindex="0" id="snkc" class="sneaker-cont11">
-                <img loading="lazy" class="sneaker-img" src="/imgs/2.4.webp" alt="mike Jordan SB">
+                <img loading="lazy" class="sneaker-img" src="imgs/2.4.webp" alt="mike Jordan SB">
                 <div class="sneakerDesc">
                     <div class="sneaker-decor"></div>
                     <div class="data-cont">
@@ -498,7 +562,7 @@
             </div>
 
             <div tabindex="0" id="snkc" class="sneaker-cont12">
-                <img loading="lazy" class="sneaker-img" src="/imgs/2.2.webp" alt="mike Jordan SB">
+                <img loading="lazy" class="sneaker-img" src="imgs/2.2.webp" alt="mike Jordan SB">
                 <div class="sneakerDesc">
                     <div class="sneaker-decor"></div>
                     <div class="data-cont">
@@ -527,7 +591,7 @@
             </div>
 
             <div tabindex="0" id="snkc" class="sneaker-cont13">
-                <img loading="lazy" class="sneaker-img" src="/imgs/1.8.webp" alt="mike Jordan SB">
+                <img loading="lazy" class="sneaker-img" src="imgs/1.8.webp" alt="mike Jordan SB">
                 <div class="sneakerDesc">
                     <div class="sneaker-decor"></div>
                     <div class="data-cont">
@@ -556,7 +620,7 @@
             </div>
 
             <div tabindex="0" id="snkc" class="sneaker-cont14">
-                <img loading="lazy" class="sneaker-img" src="/imgs/2.5.webp" alt="mike Jordan SB">
+                <img loading="lazy" class="sneaker-img" src="imgs/2.5.webp" alt="mike Jordan SB">
                 <div class="sneakerDesc">
                     <div class="sneaker-decor"></div>
                     <div class="data-cont">
@@ -585,7 +649,7 @@
             </div>
 
             <div tabindex="0" id="snkc" class="sneaker-cont15">
-                <img loading="lazy" class="sneaker-img" src="/imgs/1.9.webp" alt="mike Jordan SB">
+                <img loading="lazy" class="sneaker-img" src="imgs/1.9.webp" alt="mike Jordan SB">
                 <div class="sneakerDesc">
                     <div class="sneaker-decor"></div>
                     <div class="data-cont">
@@ -615,7 +679,7 @@
             </div>
 
             <div tabindex="0" id="snkc" class="sneaker-cont16">
-                <img loading="lazy" class="sneaker-img" src="/imgs/2.7.webp" alt="mike Jordan SB">
+                <img loading="lazy" class="sneaker-img" src="imgs/2.7.webp" alt="mike Jordan SB">
                 <div class="sneakerDesc">
                     <div class="sneaker-decor"></div>
                     <div class="data-cont">
@@ -645,36 +709,36 @@
 
             <div class="scrollImage-cont">
                 <div id="snk" class="sneakerCont">
-                    <img src="/imgs/3.1.webp" alt="">
+                    <img src="imgs/3.1.webp" alt="">
                 </div>
                 <div id="snk" class="sneakerCont">
-                    <img src="/imgs/3.2.webp" alt="">
+                    <img src="imgs/3.2.webp" alt="">
                 </div>
                 <div id="snk" class="sneakerCont">
-                    <img src="/imgs/3.3.webp" alt="">
+                    <img src="imgs/3.3.webp" alt="">
                 </div>
                 <div id="snk" class="sneakerCont">
-                    <img src="/imgs/3.4.webp" alt="">
+                    <img src="imgs/3.4.webp" alt="">
                 </div>
                 <div id="snk" class="sneakerCont">
-                    <img src="/imgs/3.1.webp" alt="">
+                    <img src="imgs/3.1.webp" alt="">
                 </div>
             </div>
             <div class="scrollImage-cont2">
                 <div id="snk" class="sneakerCont">
-                    <img src="/imgs/3.5.webp" alt="">
+                    <img src="imgs/3.5.webp" alt="">
                 </div>
                 <div id="snk" class="sneakerCont">
-                    <img src="/imgs/3.6.webp" alt="">
+                    <img src="imgs/3.6.webp" alt="">
                 </div>
                 <div id="snk" class="sneakerCont">
-                    <img src="/imgs/3.7.webp" alt="">
+                    <img src="imgs/3.7.webp" alt="">
                 </div>
                 <div id="snk" class="sneakerCont">
-                    <img src="/imgs/3.8.webp" alt="">
+                    <img src="imgs/3.8.webp" alt="">
                 </div>
                 <div id="snk" class="sneakerCont">
-                    <img src="/imgs/3.5.webp" alt="">
+                    <img src="imgs/3.5.webp" alt="">
                 </div>
             </div>
 
@@ -796,20 +860,34 @@
                     <i title="Instagram" class="fab fa-instagram"></i>
                 </a>
 
-                <a  id="in" href="https://www.linkedin.com/in/velzckcode/" target="_blank">
+                <a id="in" href="https://www.linkedin.com/in/velzckcode/" target="_blank">
                     <i title="Linkedin" class="fab fa-linkedin-in"></i>
                 </a>
             </div>
         </div>
 
-        <div class="velzck-cont">
-            <div class="velzck">
+        <div class="dripstep-cont">
+            <div class="dripstep">
                 <h2 class="v1">2022 Alejandro Velasquez.</h2>
                 <h2 class="v2"><i class="fas fa-map-marker-alt"></i> Medellín, Colombia.</h2>
             </div>
         </div>
 
     </footer>
+
+    </div> <!-- End Content Wrapper -->
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Swiper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="js/visuals.js"></script>
+    <script src="js/recommendation.js"></script>
 </body>
 
 </html>
