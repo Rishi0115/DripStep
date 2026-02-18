@@ -88,8 +88,8 @@ app.post('/api/recommend', async (req, res) => {
 
         console.log(`[SerpAPI] Found ${products.length} products`);
 
-        // Step 2: Apply rule-based filtering - get up to 10 products
-        const filteredProducts = filterService.filterAndRank(products, maxPrice, 10);
+        // Step 2: Apply rule-based filtering - get up to 25 products
+        const filteredProducts = filterService.filterAndRank(products, maxPrice, 25);
 
         if (filteredProducts.length === 0) {
             return res.json({
@@ -126,7 +126,7 @@ app.post('/api/recommend', async (req, res) => {
                 productsReturned: formattedProducts.length,
                 processingTimeMs: duration
             },
-            message: filteredProducts.length < 10
+            message: filteredProducts.length < 25
                 ? `Found ${filteredProducts.length} product(s) within your budget`
                 : null
         });

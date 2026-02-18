@@ -4,47 +4,78 @@
  */
 
 /**
+ * Remove duplicate products based on title similarity
+ * @param {Array} products - Array of products
+ * @returns {Array} Deduplicated products
+ */
+function removeDuplicates(products) {
+    const seen = new Map();
+
+    return products.filter(product => {
+        // Aggressively normalize title for better duplicate detection
+        const normalizedTitle = product.title
+            .toLowerCase()
+            .replace(/[^\w\s]/g, '') // Remove all special characters and punctuation
+            .replace(/\b(men|women|mens|womens|kids|unisex|cricket|running|shoes|sneakers|shoe|sneaker|puma|nike|adidas)\b/g, '') // Remove common brand/type words
+            .replace(/\s+/g, '') // Remove all spaces
+            .trim();
+
+        // Check both full normalized title and first 15 characters for similarity
+        const shortKey = normalizedTitle.substring(0, 15);
+
+        // If we've seen this exact title or very similar one, it's a duplicate
+        if (seen.has(normalizedTitle) || seen.has(shortKey)) {
+            return false;
+        }
+
+        // Mark both versions as seen to catch future duplicates
+        seen.set(normalizedTitle, true);
+        seen.set(shortKey, true);
+        return true;
+    });
+}
+
+
+/**
  * Filter and rank products based on rules
  * 
  * Rules applied:
- * 1. Price must be <= maxPrice (budget constraint)
- * 2. Must have rating data (quality signal)
- * 3. Sort by weighted score (rating * log(reviews + 1))
- * 4. Return top N products (configurable)
+ * 1. Remove duplicates (title similarity)
+ * 2. Price must be <= maxPrice (budget constraint)
+ * 3. Sort by price ascending (cheapest first)
+ * 4. Return top N products (configurable, default 25)
  * 
  * @param {Array} products - Raw products from SerpAPI
  * @param {number} maxPrice - Maximum price in INR
- * @param {number} limit - Maximum products to return (default 10)
- * @returns {Array} Filtered and ranked products
+ * @param {number} limit - Maximum products to return (default 25)
+ * @returns {Array} Filtered and ranked products sorted by price
  */
-function filterAndRank(products, maxPrice, limit = 10) {
+function filterAndRank(products, maxPrice, limit = 25) {
     if (!Array.isArray(products) || products.length === 0) {
         return [];
     }
 
-    // Step 1: Filter by price and rating existence
-    const filtered = products.filter(product => {
+    // Step 0: Remove duplicates based on title similarity
+    const deduplicated = removeDuplicates(products);
+
+    // Step 1: Filter by price only (relaxed to get more results)
+    const filtered = deduplicated.filter(product => {
         // Must be within budget
         if (product.price > maxPrice) {
             return false;
         }
-
-        // Must have some rating data (quality indicator)
-        if (!product.rating || product.rating <= 0) {
-            return false;
-        }
-
+        // Accept all products with valid price (removed strict rating requirement)
         return true;
     });
 
-    // Step 2: Calculate ranking score
+    // Step 2: Calculate ranking score for quality indication
     // Formula: rating * log(reviews + 1) * priceEfficiency
     // Higher rating = better, more reviews = more trustworthy
     // priceEfficiency rewards products that use less of the budget
     const scored = filtered.map(product => {
-        const ratingScore = product.rating;
-        const reviewScore = Math.log10(product.reviews + 1) + 1; // +1 to avoid log(0)
-        const priceEfficiency = 1 - (product.price / maxPrice) * 0.2; // Small bonus for cheaper
+        const ratingScore = product.rating || 3; // Default to 3 if no rating
+        const reviewScore = Math.log10(product.reviews + 1) + 1;
+        const priceEfficiency = 1 - (product.price / maxPrice) * 0.2;
 
         const score = ratingScore * reviewScore * priceEfficiency;
 
@@ -54,8 +85,8 @@ function filterAndRank(products, maxPrice, limit = 10) {
         };
     });
 
-    // Step 3: Sort by score descending
-    scored.sort((a, b) => b._score - a._score);
+    // Step 3: Sort by PRICE (lowest first) for best deals
+    scored.sort((a, b) => a.price - b.price);
 
     // Step 4: Return top N products
     const topProducts = scored.slice(0, limit);
