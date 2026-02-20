@@ -6,7 +6,7 @@
 (function () {
     'use strict';
 
-    const API_BASE = 'http://localhost:3000';
+    const API_BASE = 'https://dripstep.onrender.com';
 
     // DOM Elements - populated on init
     let elements = {};
