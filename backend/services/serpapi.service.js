@@ -11,17 +11,22 @@ const SERPAPI_URL = 'https://serpapi.com/search.json';
 /**
  * Search for products using SerpAPI Google Shopping
  * @param {string} query - Product search query
+ * @param {number} maxPrice - Maximum budget in INR
  * @returns {Promise<Array>} Array of product objects
  */
-async function searchProducts(query) {
+async function searchProducts(query, maxPrice) {
     if (!SERPAPI_KEY) {
         throw new Error('SERPAPI_KEY not configured');
     }
 
+    // Always build query as "<userInput> shoes under ₹<budget>"
+    // This ensures Google Shopping returns only shoes within budget
+    const shoeQuery = `${query} only Shoes under ₹${maxPrice}`;
+
     const params = {
         api_key: SERPAPI_KEY,
         engine: 'google_shopping',
-        q: query,
+        q: shoeQuery,
         location: 'India',
         gl: 'in',
         hl: 'en',

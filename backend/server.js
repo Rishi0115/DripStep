@@ -69,7 +69,7 @@ app.post('/api/recommend', async (req, res) => {
         // Step 1: Fetch products from SerpAPI
         let products;
         try {
-            products = await serpApiService.searchProducts(cleanProductName);
+            products = await serpApiService.searchProducts(cleanProductName, maxPrice);
         } catch (serpError) {
             console.error('[SerpAPI Error]', serpError.message);
             return res.status(503).json({

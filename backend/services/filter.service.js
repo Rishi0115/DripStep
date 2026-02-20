@@ -36,15 +36,68 @@ function removeDuplicates(products) {
 }
 
 
+// Keywords that identify a product as footwear
+const SHOE_KEYWORDS = [
+    'shoe', 'shoes', 'sneaker', 'sneakers', 'boot', 'boots',
+    'sandal', 'sandals', 'slipper', 'slippers', 'loafer', 'loafers',
+    'heel', 'heels', 'footwear', 'trainer', 'trainers', 'moccasin',
+    'moccasins', 'wedge', 'pump', 'stiletto', 'oxford', 'derby',
+    'ballet flat', 'espadrille', 'clog', 'clogs', 'flip flop',
+    'flip-flop', 'mule', 'mules', 'canvas shoe', 'sports shoe',
+    'running shoe', 'walking shoe', 'leather shoe', 'court shoe',
+    'juta', 'jutti', 'mojari', 'chappal', 'jooti'
+];
+
+// Blocklist: products with these words are NEVER shoes
+const NON_SHOE_KEYWORDS = [
+    't-shirt', 'tshirt', 't shirt', 'shirt', 'polo', 'top',
+    'dress', 'kurta', 'kurti', 'saree', 'sari', 'lehenga',
+    'jeans', 'trouser', 'pant', 'shorts', 'skirt', 'palazzo',
+    'jacket', 'hoodie', 'sweater', 'sweatshirt', 'blazer', 'coat',
+    'bag', 'backpack', 'handbag', 'purse', 'wallet', 'clutch',
+    'watch', 'belt', 'sunglasses', 'glasses', 'cap', 'hat',
+    'earring', 'necklace', 'bracelet', 'ring', 'jewel',
+    'dumbbell', 'weight', 'barbell', 'kettlebell', 'gym equipment',
+    'ball', 'bat', 'racket', 'helmet', 'glove', 'pad',
+    'perfume', 'deodorant', 'cream', 'lotion', 'shampoo',
+    'phone', 'charger', 'cable', 'headphone', 'earphone', 'speaker',
+    'toy', 'game', 'puzzle', 'book', 'notebook',
+    'wardrobe', 'furniture', 'bedsheet', 'pillow', 'curtain',
+    'bra', 'underwear', 'boxer', 'lingerie', 'innerwear',
+    'dupatta', 'stole', 'scarf', 'shawl',
+    'tracksuit', 'track pant', 'jogger pant', 'legging',
+    'mask', 'towel', 'sock set', 'gift set'
+];
+
+/**
+ * Returns true if the product title is a shoe/footwear product.
+ * Rejects anything containing blocklisted non-shoe words first,
+ * then requires at least one shoe keyword.
+ * @param {string} title
+ * @returns {boolean}
+ */
+function isShoeProduct(title) {
+    const lower = title.toLowerCase();
+
+    // Reject if title contains any non-shoe keyword (T-shirts, bags, etc.)
+    if (NON_SHOE_KEYWORDS.some(blocked => lower.includes(blocked))) {
+        return false;
+    }
+
+    // Must contain a shoe keyword
+    return SHOE_KEYWORDS.some(kw => lower.includes(kw));
+}
+
 /**
  * Filter and rank products based on rules
- * 
+ *
  * Rules applied:
  * 1. Remove duplicates (title similarity)
- * 2. Price must be <= maxPrice (budget constraint)
- * 3. Sort by price ascending (cheapest first)
- * 4. Return top N products (configurable, default 25)
- * 
+ * 2. Keep only shoe/footwear products (blocks unrelated items like dumbbells)
+ * 3. Price must be <= maxPrice (budget constraint)
+ * 4. Sort by price ascending (cheapest first)
+ * 5. Return top N products (configurable, default 25)
+ *
  * @param {Array} products - Raw products from SerpAPI
  * @param {number} maxPrice - Maximum price in INR
  * @param {number} limit - Maximum products to return (default 25)
@@ -58,13 +111,15 @@ function filterAndRank(products, maxPrice, limit = 25) {
     // Step 0: Remove duplicates based on title similarity
     const deduplicated = removeDuplicates(products);
 
-    // Step 1: Filter by price only (relaxed to get more results)
-    const filtered = deduplicated.filter(product => {
-        // Must be within budget
+    // Step 1: Keep only shoe/footwear products — blocks non-shoe items
+    // (e.g. dumbbells returned when user searches "sports")
+    const shoeOnly = deduplicated.filter(product => isShoeProduct(product.title));
+
+    // Step 2: Filter by price
+    const filtered = shoeOnly.filter(product => {
         if (product.price > maxPrice) {
             return false;
         }
-        // Accept all products with valid price (removed strict rating requirement)
         return true;
     });
 
